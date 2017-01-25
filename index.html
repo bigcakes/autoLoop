@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AutoLoop</title>
+  <style>
+    #videoPlayer {
+      display: block;
+      margin: 50px 50px;
+    }
+
+    .video-link {
+      width: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div class="video-wrapper">
+    <label>Video Link</label>
+    <input type="text" class="video-link" value="https://www.youtube.com/watch?v=pJMJY_R3KIQ" />
+    <br />
+    <label>Start Time</label>
+    <input type="text" class="start-time" value="5" />
+    <br />
+    <label>End Time</label>
+    <input type="text" class="end-time" value="15" />
+    <br />
+
+    <button type="button" id="loadVideo">Load!</button>
+
+    <div id="videoPlayer">
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="js/index.js"></script>
+  <!-- <script type="text/javascript">
+    var tag = document.createElement('script');
+    tag.id = 'iframe-demo';
+    tag.src = 'https://www.youtube.com/iframe_api';
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('existing-iframe-example', {
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+      });
+    }
+    function onPlayerReady(event) {
+      document.getElementById('existing-iframe-example').style.borderColor = '#FF6D00';
+    }
+    function changeBorderColor(playerStatus) {
+      var color;
+      if (playerStatus == -1) {
+        color = "#37474F"; // unstarted = gray
+      } else if (playerStatus == 0) {
+        color = "#FFFF00"; // ended = yellow
+      } else if (playerStatus == 1) {
+        color = "#33691E"; // playing = green
+      } else if (playerStatus == 2) {
+        color = "#DD2C00"; // paused = red
+      } else if (playerStatus == 3) {
+        color = "#AA00FF"; // buffering = purple
+      } else if (playerStatus == 5) {
+        color = "#FF6DOO"; // video cued = orange
+      }
+      if (color) {
+        document.getElementById('existing-iframe-example').style.borderColor = color;
+      }
+    }
+    function onPlayerStateChange(event) {
+      changeBorderColor(event.data);
+    }
+  </script> -->
+</body>
+</html>
