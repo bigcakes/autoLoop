@@ -8,26 +8,42 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 // Replace the 'ytplayer' element with an <iframe> and
 // YouTube player after the API code downloads.
-var player;
+var player,
+  startTime,
+  endTime,
+  videoId,
+  loopingTimeout;
+
 function onYouTubeIframeAPIReady() {
   $("#loadVideo").click(function () {
-    // player = new YT.Player('videoPlayer', {
-    //   height: '360',
-    //   width: '640',
-    //   videoId: 'pJMJY_R3KIQ',
-    //   autoplay: 1,
-    //   loop: 1,
-    //   start: 10,
-    //   end: 20
-    // });
+    startTime = +$(".start-time").val();
+    endTime = +$(".end-time").val();
 
+    if (startTime > endTime) {
+      alert("No!!");
+      return;
+    }
+
+    var videoId = $(".video-link").val().split('v=')[1];
+    var ampersandPosition = videoId.indexOf('&');
+    if(ampersandPosition != -1) {
+      videoId = videoId.substring(0, ampersandPosition);
+    }
+
+    if (player) {
+      player.destroy();
+    }
+
+    if (loopingTimeout) {
+      clearTimeout(loopingTimeout);
+    }
+    
     player = new YT.Player('videoPlayer', {
       height: '390',
       width: '640',
-      videoId: 'pJMJY_R3KIQ',
+      videoId: videoId,
       events: {
-        'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
+        'onReady': onPlayerReady
       }
     });
   });
@@ -36,18 +52,8 @@ function onYouTubeIframeAPIReady() {
 // 4. The API will call this function when the video player is ready.
 function onPlayerReady(event) {
   event.target.playVideo();
-}
-
-// 5. The API calls this function when the player's state changes.
-//    The function indicates that when playing a video (state=1),
-//    the player should play for six seconds and then stop.
-var done = false;
-function onPlayerStateChange(event) {
-  if (event.data == YT.PlayerState.PLAYING) {
-    setTimeout(loop, 1000);
-    //setTimeout(stopVideo, 6000);
-    //done = true;
-  }
+  player.seekTo(startTime);
+  loopingTimeout = setTimeout(loop, 1000);
 }
 
 function loop() {
@@ -55,12 +61,12 @@ function loop() {
 
   console.log("looping", new Date(), "time", timePassed)
 
-  if (timePassed > 20) {
+  if (timePassed > endTime) {
 
-    player.seekTo(10);
+    player.seekTo(startTime);
   }
 
-  setTimeout(loop, 1000);
+  loopingTimeout = setTimeout(loop, 1000);
 }
 
 function stopVideo() {

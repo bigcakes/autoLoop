@@ -5,30 +5,50 @@
   <style>
     #videoPlayer {
       display: block;
-      margin: 50px 50px;
+      margin: 50px auto;
     }
 
     .video-link {
       width: 400px;
     }
+
+    .video-form {
+      margin-top: 50px;
+    }
   </style>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 <body>
   <div class="video-wrapper">
-    <label>Video Link</label>
-    <input type="text" class="video-link" value="https://www.youtube.com/watch?v=pJMJY_R3KIQ" />
-    <br />
-    <label>Start Time</label>
-    <input type="text" class="start-time" value="5" />
-    <br />
-    <label>End Time</label>
-    <input type="text" class="end-time" value="15" />
-    <br />
+    <div class="row">
+      <div class="col-md-6 video-form">
+        <div class="row">
+          <div class="col-lg-6 col-lg-offset-3 col-xs-10 col-xs-offset-1">
+            <div class="form-group">
+              <label for="videoLink">Video Link</label>
+              <input type="text" id="videoLink" class="video-link form-control" value="https://www.youtube.com/watch?v=pJMJY_R3KIQ" />
+            </div>
+            <div class="form-group">
+              <label for="startTime">Start Time</label>
+              <input type="text" id="startTime" class="start-time form-control" value="5" />
+            </div>
+            <div class="form-group">
+              <label for="endTime">End Time</label>
+              <input type="text" id="endTime" class="end-time form-control" value="15" />
+            </div>
+            <button type="button" id="loadVideo" class="btn btn-success"><i class="fa fa-play" aria-hidden="true"></i> Load!</button>
+          </div>
+        </div>
 
-    <button type="button" id="loadVideo">Load!</button>
-
-    <div id="videoPlayer">
+      </div>
+      <div class="col-md-6">
+        <div id="videoPlayer">
+        </div>
+      </div>
     </div>
+
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="js/index.js"></script>
